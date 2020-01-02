@@ -56,7 +56,7 @@ def main():
         for event in pygame.event.get():
 
             #print(event)
-            
+
             if event.type == pygame.QUIT:
                 crashed = True
 
