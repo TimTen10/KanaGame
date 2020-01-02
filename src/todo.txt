@@ -1,0 +1,5 @@
+CHECK --- Erlauben Vertipper zu verbessern
+Alle Kana einfügen (Hiragana und vllt Katakana)
+Einstellen können welche der Kana man haben möchte -> Scenemanager
+Bei falschen Eingaben speichern, was denn der Fehler war -> zB "ka" wurde als "ga" eingegeben
+Aktuelle Eingabe anzeigen
