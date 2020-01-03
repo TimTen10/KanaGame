@@ -14,7 +14,7 @@ def main():
     # Fill background
     background = pygame.Surface(screen.get_size())
     background = background.convert()
-    background.fill((250, 250, 250))
+    background.fill((255, 255, 255))
 
     clock = pygame.time.Clock()
 
@@ -57,7 +57,7 @@ def main():
 
         for event in pygame.event.get():
 
-            print(event)
+            #print(event)
 
             if event.type == pygame.QUIT:
                 crashed = True
