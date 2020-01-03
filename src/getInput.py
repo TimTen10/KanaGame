@@ -23,8 +23,7 @@ def main():
     # Scoretext on the display
     right, wrong = 0, 0
     def handle_score():
-        #font = pygame.font.Font(None, 36)
-        font = pygame.font.SysFont('MS PGothic', 36)
+        font = pygame.font.Font(None, 36)
         text = font.render(f"Right: {right} and Wrong: {wrong}", 1, (255, 10, 10))
         textpos = text.get_rect()
         textpos.centerx = background.get_rect().centerx
@@ -40,6 +39,9 @@ def main():
 
     def handle_syllables():
         background.blit(type_syl.get_image(), type_syl.get_pos())
+        font = pygame.font.Font(None, 36)
+        text = font.render(f"{floating_sil}", 1, (255, 10, 10))
+        background.blit(text, (380, 500))
 
     def draw_window():
         background.fill((255, 255, 255)) # Erases everything old
@@ -55,13 +57,14 @@ def main():
 
         for event in pygame.event.get():
 
-            #print(event)
+            print(event)
 
             if event.type == pygame.QUIT:
                 crashed = True
 
             if event.type == pygame.KEYDOWN:
-                if event.dict['unicode'] == ' ':
+                # lock the current floating syllable as the answer to the current kana.
+                if event.dict['unicode'] == ' ' or event.dict['unicode'] == '\r':
                     locked_sil = floating_sil.strip()
                     floating_sil = ""
 
@@ -70,8 +73,10 @@ def main():
                         type_syl = init_type_syl()
                     else:
                         wrong += 1
+                # delete the last letter typed.
                 elif event.dict['unicode'] == '\x08':
                     floating_sil = floating_sil[:-1]
+                # add the given letter to the answer string.
                 else:
                     floating_sil += event.dict['unicode']
 
