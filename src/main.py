@@ -1,5 +1,5 @@
 import pygame
-from scenes import GameScene as GS
+from gamescene import GameScene as GS
 
 _SIZE = (800, 600)
 _scenes = []
