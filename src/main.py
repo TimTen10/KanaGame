@@ -8,7 +8,7 @@ _active_scene_id = 0
 def main():
     pygame.init()
     screen = pygame.display.set_mode(_SIZE)
-    pygame.display.set_caption('Hiragana Trainer')
+    pygame.display.set_caption('Hiragana Trainer V1')
     crashed = False
 
     # init scenes
