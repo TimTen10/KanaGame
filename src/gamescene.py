@@ -5,14 +5,19 @@ import syllables as sy
 
 class GameScene(sca.AbstractScene):
 
-    def __init__(self, screen, _scene_id):
+    def __init__(self, screen, _scene_id, syllables_list):
         super().__init__(screen, _scene_id)
         self.right = 0
         self.wrong = 0
-        self.type_syl = random.choice(sy.syllables)
+        self.game_syllables = sy.get_syllables(syllables_list)
+        self.type_syl = random.choice(self.game_syllables)
         self.floating_syl = ""
         self.locked_syl = ""
         self.exit_button = (350, 350, 20, 20)
+        self.mistake_dict = dict()
+
+        for syl in self.game_syllables:
+            self.mistake_dict[syl.get_name()] = 0
 
     def handle_score(self):
         font = pygame.font.Font(None, 36)
@@ -39,7 +44,7 @@ class GameScene(sca.AbstractScene):
             if event.type == pygame.MOUSEBUTTONDOWN and event.dict['button'] == 1:
                 # checks button boundaries
                 if 350 < event.dict['pos'][0] < 370 and 350 < event.dict['pos'][1] < 370:
-                    active_scene = 1
+                    active_scene = 2
 
             if event.type == pygame.KEYDOWN:
                 # lock the current floating syllable as the answer to the current kana.
@@ -52,6 +57,8 @@ class GameScene(sca.AbstractScene):
                         self.type_syl = random.choice(sy.syllables)
                     else:
                         self.wrong += 1
+                        self.mistake_dict[self.type_syl.get_name()] += 1
+                        print(self.mistake_dict)
                 # delete the last letter typed.
                 elif event.dict['unicode'] == '\x08':
                     self.floating_syl = self.floating_syl[:-1]
