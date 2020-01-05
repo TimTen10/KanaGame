@@ -1,7 +1,7 @@
 import sceneac as sca
 import pygame
 
-class MenuSCene(sca.AbstractScene):
+class MenuScene(sca.AbstractScene):
 
     def __init__(self, screen, _scene_id):
         super().__init__(screen, _scene_id)

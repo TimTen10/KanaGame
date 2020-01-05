@@ -4,6 +4,13 @@ Einstellen können welche der Kana man haben möchte -> Scenemanager
 Bei falschen Eingaben speichern, was denn der Fehler war -> zB "ka" wurde als "ga" eingegeben
 CHECK --- Aktuelle Eingabe anzeigen
 Szenen und Szenenhandler hinzufügen
+Syllables Position ist noch hardcoded
 
 scenes (GameScene) benötigt eine Abhängingkeit der syllables von einem Input
 -> Schreit nach Input Argument
+
+TODO: gamescene - Button als Rect Variable machen
+
+TODO: endingscene and menuscene: Beide müssen eigentlich eine der anderen Scene Arten
+in Abhängigkeit bestimmter Variablen erstellen. Zum Beispiel GameScene je nach ausgewählter
+Hiragana und EndScene in Abhängigkeit der falschen Hiragana.

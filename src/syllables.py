@@ -24,8 +24,8 @@ class _Syllable:
         self._syllable = syllable
         self._kana_image = pygame.image.load(kana_image)
 
-        self._xpos = 800 / 2 - 60
-        self._ypos = 600 / 2 - 60
+        self._xpos = 400 / 2 - 60
+        self._ypos = 400 / 2 - 60
         self._spd = 1
 
     def get_name(self):

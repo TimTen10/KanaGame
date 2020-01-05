@@ -12,6 +12,7 @@ class GameScene(sca.AbstractScene):
         self.type_syl = random.choice(sy.syllables)
         self.floating_syl = ""
         self.locked_syl = ""
+        self.exit_button = (350, 350, 20, 20)
 
     def handle_score(self):
         font = pygame.font.Font(None, 36)
@@ -24,15 +25,21 @@ class GameScene(sca.AbstractScene):
         self.background.blit(self.type_syl.get_image(), self.type_syl.get_pos())
         font = pygame.font.Font(None, 36)
         text = font.render(f"{self.floating_syl}", 1, (255, 10, 10))
-        self.background.blit(text, (380, 500))
+        self.background.blit(text, (185, 350))
 
     def logic(self):
+        active_scene = self._scene_id
         crashed = False
 
         for event in pygame.event.get():
 
             if event.type == pygame.QUIT:
                 crashed = True
+
+            if event.type == pygame.MOUSEBUTTONDOWN and event.dict['button'] == 1:
+                # checks button boundaries
+                if 350 < event.dict['pos'][0] < 370 and 350 < event.dict['pos'][1] < 370:
+                    active_scene = 1
 
             if event.type == pygame.KEYDOWN:
                 # lock the current floating syllable as the answer to the current kana.
@@ -52,11 +59,14 @@ class GameScene(sca.AbstractScene):
                 else:
                     self.floating_syl += event.dict['unicode']
 
-        return crashed
+        return crashed, active_scene
 
 
     def draw(self):
         self.background.fill((255, 255, 255))
+
+        pygame.draw.rect(self.background, (255, 50, 50), self.exit_button)
+
         self.handle_score()
         self.handle_syllables()
         return self.background

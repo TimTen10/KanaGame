@@ -1,9 +1,9 @@
 import pygame
 from gamescene import GameScene as GS
+from endingscene import EndScene as ES
 
-_SIZE = (800, 600)
+_SIZE = (400, 400)
 _scenes = []
-_active_scene_id = 0
 
 def main():
     pygame.init()
@@ -13,12 +13,15 @@ def main():
 
     # init scenes
     _scenes.append(GS(screen=screen, _scene_id=0))
+    _scenes.append(ES(screen=screen, _scene_id=1))
+
+    _active_scene_id = 0
 
     _scenes[_active_scene_id].draw()
 
     while not crashed:
 
-        crashed = _scenes[_active_scene_id].logic()
+        crashed, _active_scene_id = _scenes[_active_scene_id].logic()
 
         background = _scenes[_active_scene_id].draw()
         screen.blit(background, (0, 0))
