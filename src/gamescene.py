@@ -35,6 +35,7 @@ class GameScene(sca.AbstractScene):
     def logic(self):
         active_scene = self._scene_id
         crashed = False
+        scene_info = None
 
         for event in pygame.event.get():
 
@@ -45,6 +46,7 @@ class GameScene(sca.AbstractScene):
                 # checks button boundaries
                 if 350 < event.dict['pos'][0] < 370 and 350 < event.dict['pos'][1] < 370:
                     active_scene = 2
+                    scene_info = self.mistake_dict
 
             if event.type == pygame.KEYDOWN:
                 # lock the current floating syllable as the answer to the current kana.
@@ -58,7 +60,6 @@ class GameScene(sca.AbstractScene):
                     else:
                         self.wrong += 1
                         self.mistake_dict[self.type_syl.get_name()] += 1
-                        print(self.mistake_dict)
                 # delete the last letter typed.
                 elif event.dict['unicode'] == '\x08':
                     self.floating_syl = self.floating_syl[:-1]
@@ -66,7 +67,7 @@ class GameScene(sca.AbstractScene):
                 else:
                     self.floating_syl += event.dict['unicode']
 
-        return crashed, active_scene
+        return crashed, active_scene, scene_info
 
 
     def draw(self):

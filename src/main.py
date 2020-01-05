@@ -24,7 +24,12 @@ def main():
 
     while not crashed:
 
-        crashed, _active_scene_id = _scenes[_active_scene_id].logic()
+        active_scene = _active_scene_id
+
+        crashed, _active_scene_id, scene_info = _scenes[_active_scene_id].logic()
+
+        if active_scene < _active_scene_id and active_scene == 1:
+            _scenes[2].mistake_dict = _scenes[1].mistake_dict
 
         background = _scenes[_active_scene_id].draw()
 

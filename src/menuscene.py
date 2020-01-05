@@ -21,14 +21,19 @@ class MenuScene(sca.AbstractScene):
     def logic(self):
         active_scene = self._scene_id
         crashed = False
+        scene_info = None
 
         for event in pygame.event.get():
-                if event.type == pygame.MOUSEBUTTONDOWN and event.dict['button'] == 1:
-                    # checks button boundaries
-                    if 350 < event.dict['pos'][0] < 370 and 350 < event.dict['pos'][1] < 370:
-                        active_scene = 1
 
-        return crashed, active_scene
+            if event.type == pygame.QUIT:
+                crashed = True
+
+            if event.type == pygame.MOUSEBUTTONDOWN and event.dict['button'] == 1:
+                # checks button boundaries
+                if 350 < event.dict['pos'][0] < 370 and 350 < event.dict['pos'][1] < 370:
+                    active_scene = 1
+
+        return crashed, active_scene, scene_info
 
     def draw(self):
         self.background.fill((255, 255, 255))
